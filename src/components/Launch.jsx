@@ -4,13 +4,16 @@ class Launch extends Component {
 
   render() {
 
-    let launch = this.props.launch;
+    let launch = this.props.launch || {};
+    let rocket = this.props.rocket || {};
 
     return (
-      <li>
-        <h2> { launch.mission_name } </h2>
-        <div> Flight Number: { launch.flight_number } </div>
-      </li>
+      <React.Fragment>
+        <p><strong>Flight Number:</strong> { launch.flight_number}</p>
+        <p><strong>ID:</strong> { rocket.rocket_id }</p>
+        <p><strong>Cost per launch:</strong> { rocket.cost_per_launch }</p>
+        <p><strong>Description:</strong> { rocket.description }</p>
+      </React.Fragment>
     );
   }
 }
