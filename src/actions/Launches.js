@@ -16,9 +16,21 @@ const receiveLaunches = response => ({
   }
 });
 
+const receiveLaunchesError = error => {
+  return ({
+  type: ACTIONS.RECEIVE_LAUNCHES,
+  payload: {
+    error: true,
+    errorMessage: error.response.data,
+    launches: [],
+  }
+})};
+
 export const fetchLaunches = dispatch => {
   dispatch(requestLaunches());
-  return LaunchService.get().then(response => dispatch(receiveLaunches(response)));
+  return LaunchService.get()
+    .then(response => dispatch(receiveLaunches(response)))
+    .catch(error => dispatch(receiveLaunchesError(error)));
 };
 
 const shouldFetchLaunches = launchCollection => !launchCollection.complete && !launchCollection.fetching;

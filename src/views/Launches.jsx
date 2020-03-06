@@ -16,6 +16,10 @@ class LaunchesView extends Component {
       return <div> LOADING </div>;
     }
 
+    if (launchCollection && launchCollection.error) {
+      return <div> ERROR: {launchCollection.errorMessage} </div>;
+    }
+
     if (!launchCollection.launches.length) {
       return <div> NO DATA </div>;
     }
