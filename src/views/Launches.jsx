@@ -40,4 +40,6 @@ class LaunchesView extends Component {
   }
 }
 
-export default ConnectedView(LaunchesView, 'launches');
+const storesToMap = {launchCollection: null};
+
+export default ConnectedView(LaunchesView, 'launches', storesToMap);

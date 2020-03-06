@@ -6,7 +6,7 @@ import Navigation from '../components/Navigation';
 
 const menu = Navigation();
 
-function MasterLayoutHOC(WrappedComponent, pageName) {
+function MasterLayoutHOC(WrappedComponent, pageName, storesToMap) {
   class MasterLayoutImpl extends Component {
     render() {
 
@@ -23,7 +23,8 @@ function MasterLayoutHOC(WrappedComponent, pageName) {
     }
   }
 
-  const mapStateToProps = state => state;
+  // Pluck out specified parts of the store
+  const mapStateToProps = state => (storesToMap => storesToMap)(state);
 
   const mapDispatchToProps = dispatch => ({
     dispatch
