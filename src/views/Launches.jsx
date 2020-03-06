@@ -5,11 +5,11 @@ import Launch from '../components/Launch';
 
 class LaunchesView extends Component {
   componentDidMount() {
-    const { dispatch, launchesCollection } = this.props;
-    fetchLaunchesIfNeeded({ dispatch, launchesCollection });
+    const { dispatch, launchCollection } = this.props;
+    fetchLaunchesIfNeeded({ dispatch, launchCollection });
   }
 
-  getContent() {
+  renderContent() {
     const { launchCollection } = this.props;
 
     if (!launchCollection || launchCollection.fetching) {
@@ -20,19 +20,12 @@ class LaunchesView extends Component {
       return <div> NO DATA </div>;
     }
 
-    let launches = [];
-
-    for (let i = 0; i < launchCollection.launches.length; i++) {
-      const launch = launchCollection.launches[i];
-
-      launches.push(
-        <Launch {...{
-          key: launch.launch_id,
-          launch
-        }} />
-
-      )
-    }
+    let launches = launchCollection.launches.map(launch =>
+      <Launch {...{
+        key: launch.launch_id,
+        launch
+      }} />
+    );
 
     return <ul>{launches}</ul>;
   }
@@ -41,7 +34,7 @@ class LaunchesView extends Component {
     return (
       <div>
         <h2> SpaceX launches </h2>
-        {this.getContent()}
+        {this.renderContent()}
       </div>
     );
   }
